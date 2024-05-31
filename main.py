@@ -1,4 +1,9 @@
 import os
+import sys 
+
+import logging
+logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
+
 from github import Github
 from utility import (
     format_data_for_openai,
