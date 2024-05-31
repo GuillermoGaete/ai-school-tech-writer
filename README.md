@@ -21,3 +21,11 @@ Embrace your creativity and personalize this project to craft a solution that un
 - **Sensitive Information:** If your implementation involves sensitive information, you are not required to submit a public repository. Instead, a detailed review of your project through a Loom video is acceptable, where you can demonstrate the functionality and discuss the technologies used without exposing confidential data.
 
 ---
+
+### Updates
+
+- **Environment Variables:** Ensure that the GitHub API token is set to `DEV_GITHUB_TOKEN` in your environment variables, reflecting the code update from the latest pull request.
+
+---
+
+This update maintains the existing style and clarity of the README while incorporating details relevant to the recent code changes.
