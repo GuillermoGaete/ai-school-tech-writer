@@ -40,10 +40,7 @@ def main():
     
     # Get the commit messages associated with the pull request
     commit_messages = [commit.commit.message for commit in pull_request.get_commits()]
-
-    # Combine all commit messages
-    commit_messages = '\n'.join(commit_messages) + '\n\n'
-
+    
     # Format data for OpenAI prompt
     prompt = format_data_for_openai(pull_request_diffs, readme_content, commit_messages)
 
