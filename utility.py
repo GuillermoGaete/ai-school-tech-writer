@@ -1,6 +1,8 @@
 import os
 import base64
-from openai import OpenAI
+import openai
+from langsmith.wrappers import wrap_openai
+from langsmith import traceable
 
 def format_data_for_openai(diffs, readme_content, commit_messages):
     prompt = None
@@ -31,8 +33,13 @@ def format_data_for_openai(diffs, readme_content, commit_messages):
     )
     return prompt
 
+@traceable # Auto-trace this function
+def get_model():
+    return "gpt-3.5-turbo"
+
 def call_openai(prompt):
-    client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+    # Auto-trace LLM calls in-context
+    client = wrap_openai(openai.Client())
     try:
         # Construct the chat messages for the conversation
         messages = [
@@ -42,13 +49,15 @@ def call_openai(prompt):
         
         # Make the API call to OpenAI chat interface
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model=get_model(),
             messages=messages,
         )
 
         return response.choices[0].message.content 
     except Exception as e:
         print(f"Error making OpenAI API call: {e}")
+
+
 
 def update_readme_and_create_pr(repo, updated_readme, readme_sha):
     """Submit Updated README content as a PR in new branch."""
