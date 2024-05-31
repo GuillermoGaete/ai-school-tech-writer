@@ -1,7 +1,10 @@
 import os
 from github import Github
-from utility import *
-
+from utility import (
+    format_data_for_openai,
+    call_openai,
+    update_readme_and_create_pr,
+)
 def main():
     # Initialize GitHub API with token
     g = Github(os.getenv('GITHUB_ACTIONS_TOKEN'))
