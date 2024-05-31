@@ -10,6 +10,8 @@ from utility import (
     call_openai,
     update_readme_and_create_pr,
 )
+
+logger = logging.getLogger(__name__)
 def main():
     # Initialize GitHub API with token
     g = Github(os.getenv('GITHUB_ACTIONS_TOKEN'))
@@ -53,3 +55,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    logger.info("Finish!")
