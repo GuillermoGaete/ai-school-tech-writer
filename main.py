@@ -1,7 +1,10 @@
 import os
 from github import Github
-from utility import *
-
+from utility import (
+    format_data_for_openai,
+    call_openai,
+    update_readme_and_create_pr,
+)
 def main():
     # Initialize GitHub API with token
     g = Github(os.getenv('GITHUB_ACTIONS_TOKEN'))
@@ -12,10 +15,9 @@ def main():
     
     # Get the repo object
     repo = g.get_repo(repo_path)
-    print(repo)
+
     # Fetch README content (assuming README.md)
     readme_content = repo.get_contents("README.md")
-    print(readme_content)
 
     # Fetch pull request by number
     pull_request = repo.get_pull(pull_request_number)
@@ -46,4 +48,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    print("Finish!")
